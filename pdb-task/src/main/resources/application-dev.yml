@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    driverClassName: net.sf.log4jdbc.DriverSpy
+    #driverClassName: com.mysql.jdbc.Driver
+    # jdbc:mysql://
+    url: jdbc:log4jdbc:mysql://120.78.86.30:3306/pdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull
+    username: admin
+    password: 5j78mEPYi2
+    filters: stat
+    maxActive: 50
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 5
+    maxIdle: 20
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 1200000
+    validationQuery: select 2
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  ###redis配置
+  redis:
+    host: 120.78.86.30
+    port: 46379
+    password: 123456
+    pool:
+      # 连接池中的最大空闲连接
+      max-active: 200
+      # 连接池中的最大空闲连接
+      max-idle: 10
+      # 连接池中的最小空闲连接
+      min-idle: 1
+      # 连接池最大阻塞等待时间
+      max-wait: -1

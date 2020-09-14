@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    driverClassName: net.sf.log4jdbc.DriverSpy
+    #driverClassName: com.mysql.jdbc.Driver
+    # jdbc:mysql://
+    url: jdbc:log4jdbc:mysql://120.78.86.30:3306/pdb?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull
+    username: admin
+    password: 5j78mEPYi2
+    filters: stat
+    maxActive: 50
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 5
+    maxIdle: 20
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 1200000
+    validationQuery: select 2
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+  ###文件上传限制
+  http:
+    multipart:
+      maxFileSize: 100Mb
+      maxRequestSize: 100Mb
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    check-template-location: true
+    expose-session-attributes: false
+    content-type: text/html
+    expose-request-attributes: false
+    enabled: true
+    charset: UTF-8
+    cache: false
+    template-loader-path: classpath:/templates
+    suffix: .ftl
+    request-context-attribute: request
+  mvc:
+    static-path-pattern: /static/**
+

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdb.admin.mapper.SystemPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.pdb.admin.entity.SystemPermission">
+    <id column="per_id" jdbcType="BIGINT" property="perId" />
+    <result column="per_parent_id" jdbcType="BIGINT" property="perParentId" />
+    <result column="per_name" jdbcType="VARCHAR" property="perName" />
+    <result column="per_type" jdbcType="VARCHAR" property="perType" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="per_url" jdbcType="VARCHAR" property="perUrl" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    per_id, per_parent_id, per_name, per_type, permission, per_url, status, remark, create_by, 
+    create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_permission
+    where per_id = #{perId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_system_permission
+    where per_id = #{perId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pdb.admin.entity.SystemPermission">
+    insert into tb_system_permission (per_id, per_parent_id, per_name, 
+      per_type, permission, per_url, 
+      status, remark, create_by, 
+      create_time, update_by, update_time
+      )
+    values (#{perId,jdbcType=BIGINT}, #{perParentId,jdbcType=BIGINT}, #{perName,jdbcType=VARCHAR}, 
+      #{perType,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{perUrl,jdbcType=VARCHAR}, 
+      #{status,jdbcType=SMALLINT}, #{remark,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pdb.admin.entity.SystemPermission">
+    insert into tb_system_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="perId != null">
+        per_id,
+      </if>
+      <if test="perParentId != null">
+        per_parent_id,
+      </if>
+      <if test="perName != null">
+        per_name,
+      </if>
+      <if test="perType != null">
+        per_type,
+      </if>
+      <if test="permission != null">
+        permission,
+      </if>
+      <if test="perUrl != null">
+        per_url,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="perId != null">
+        #{perId,jdbcType=BIGINT},
+      </if>
+      <if test="perParentId != null">
+        #{perParentId,jdbcType=BIGINT},
+      </if>
+      <if test="perName != null">
+        #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perType != null">
+        #{perType,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="perUrl != null">
+        #{perUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pdb.admin.entity.SystemPermission">
+    update tb_system_permission
+    <set>
+      <if test="perParentId != null">
+        per_parent_id = #{perParentId,jdbcType=BIGINT},
+      </if>
+      <if test="perName != null">
+        per_name = #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="perType != null">
+        per_type = #{perType,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="perUrl != null">
+        per_url = #{perUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where per_id = #{perId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pdb.admin.entity.SystemPermission">
+    update tb_system_permission
+    set per_parent_id = #{perParentId,jdbcType=BIGINT},
+      per_name = #{perName,jdbcType=VARCHAR},
+      per_type = #{perType,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
+      per_url = #{perUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where per_id = #{perId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectPermissionByUserId" resultType="java.lang.String">
+    SELECT
+      DISTINCT sp.permission
+    FROM tb_system_admin_role sar
+    INNER JOIN tb_system_role_permission srp ON sar.role_id = srp.role_id
+    INNER JOIN tb_system_permission sp ON srp.per_id = sp.per_id
+    WHERE sar.admin_id = #{userId}
+  </select>
+
+  <select id="selectAllPermission" resultType="java.lang.String">
+    SELECT DISTINCT sp.permission FROM tb_system_permission sp
+  </select>
+
+  <select id="selectPermissionByRoleId" resultType="java.lang.String">
+    SELECT
+      DISTINCT sp.permission
+    FROM tb_system_role_permission srp
+    INNER JOIN tb_system_permission sp ON srp.role_id = sp.role_id
+    WHERE srp.role_id = #{roleId}
+  </select>
+</mapper>

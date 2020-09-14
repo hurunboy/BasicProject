@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdb.web.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.pdb.web.entity.User">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="icon_img_url" jdbcType="VARCHAR" property="iconImgUrl" />
+    <result column="cert_name" jdbcType="VARCHAR" property="certName" />
+    <result column="cert_card" jdbcType="VARCHAR" property="certCard" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="referrer_user_id" jdbcType="BIGINT" property="referrerUserId" />
+    <result column="created_source" jdbcType="VARCHAR" property="createdSource" />
+    <result column="withdraw_password" jdbcType="VARCHAR" property="withdrawPassword" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, nick_name, gender, icon_img_url, cert_name, cert_card, device_id, referrer_user_id,
+    created_source, withdraw_password,created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pdb.web.entity.User">
+    insert into tb_user (user_id, nick_name, gender, 
+      icon_img_url, cert_name, cert_card, 
+      device_id, referrer_user_id, created_source, withdraw_password,
+      created_at, updated_at)
+    values (#{userId,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{iconImgUrl,jdbcType=VARCHAR}, #{certName,jdbcType=VARCHAR}, #{certCard,jdbcType=VARCHAR}, 
+      #{deviceId,jdbcType=VARCHAR}, #{referrerUserId,jdbcType=BIGINT}, #{createdSource,jdbcType=VARCHAR}, #{withdrawPassword,jdbcType=VARCHAR}
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pdb.web.entity.User"
+    keyProperty="userId" useGeneratedKeys="true">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="iconImgUrl != null">
+        icon_img_url,
+      </if>
+      <if test="certName != null">
+        cert_name,
+      </if>
+      <if test="certCard != null">
+        cert_card,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="referrerUserId != null">
+        referrer_user_id,
+      </if>
+      <if test="createdSource != null">
+        created_source,
+      </if>
+      <if test="withdrawPassword != null">
+        withdraw_password,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="iconImgUrl != null">
+        #{iconImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="certName != null">
+        #{certName,jdbcType=VARCHAR},
+      </if>
+      <if test="certCard != null">
+        #{certCard,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrerUserId != null">
+        #{referrerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createdSource != null">
+        #{createdSource,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawPassword != null">
+        #{withdrawPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pdb.web.entity.User">
+    update tb_user
+    <set>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="iconImgUrl != null">
+        icon_img_url = #{iconImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="certName != null">
+        cert_name = #{certName,jdbcType=VARCHAR},
+      </if>
+      <if test="certCard != null">
+        cert_card = #{certCard,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="referrerUserId != null">
+        referrer_user_id = #{referrerUserId,jdbcType=BIGINT},
+      </if>
+      <if test="createdSource != null">
+        created_source = #{createdSource,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawPassword != null">
+        withdraw_password = #{withdrawPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pdb.web.entity.User">
+    update tb_user
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      icon_img_url = #{iconImgUrl,jdbcType=VARCHAR},
+      cert_name = #{certName,jdbcType=VARCHAR},
+      cert_card = #{certCard,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      referrer_user_id = #{referrerUserId,jdbcType=BIGINT},
+      created_source = #{createdSource,jdbcType=VARCHAR},
+      withdraw_password = #{withdrawPassword,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateUserPwd">
+    update tb_user_agent set login_pwd = #{newPwd} where user_id = #{userId}
+  </update>
+</mapper>

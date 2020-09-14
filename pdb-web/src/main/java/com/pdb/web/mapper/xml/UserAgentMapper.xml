@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdb.web.mapper.UserAgentMapper">
+  <resultMap id="userAgentMap" type="com.pdb.web.entity.UserAgent">
+    <id column="user_agent_id" jdbcType="BIGINT" property="userAgentId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="wx_open_id" jdbcType="VARCHAR" property="wxOpenId" />
+    <result column="wx_union_id" jdbcType="VARCHAR" property="wxUnionId" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="deleted" jdbcType="SMALLINT" property="deleted" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_agent_id, user_id, wx_open_id, wx_union_id, telephone, email, login_pwd, last_login_time,
+    login_count, deleted, created_at, updated_at
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="userAgentMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user_agent
+    where user_agent_id = #{userAgentId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.pdb.web.entity.UserAgent">
+    insert into tb_user_agent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userAgentId != null">
+        user_agent_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="wxOpenId != null">
+        wx_open_id ,
+      </if>
+      <if test="wxUnionId != null">
+        wx_union_id,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="loginPwd != null">
+        login_pwd,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="loginCount != null">
+        login_count,
+      </if>
+      <if test="deleted != null">
+        deleted,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userAgentId != null">
+        #{userAgentId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="wxOpenId != null">
+        #{wxOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxUnionId != null">
+        #{wxUnionId,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPwd != null">
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginCount != null">
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=SMALLINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByLoginName" parameterType="java.lang.String" resultMap="userAgentMap">
+    select * from tb_user_agent
+    where telephone = #{loginName, jdbcType=VARCHAR} or email = #{loginName, jdbcType=VARCHAR}
+  </select>
+
+  <update id="loginSuccess">
+    update tb_user_agent set
+    last_login_time = #{lastLoginTime},login_count = login_count + 1
+    where user_agent_id = #{userAgentId,jdbcType=BIGINT}
+  </update>
+
+  <update id="resetLoginPwd">
+    update tb_user_agent set login_pwd = #{pwd} where user_id = #{userId}
+  </update>
+
+  <select id="selectByUserId" parameterType="java.lang.Long" resultMap="userAgentMap">
+    select * from tb_user_agent where user_id = #{userId}
+  </select>
+
+  <select id="selectByOpenId" resultMap="userAgentMap">
+    select * from tb_user_agent where wx_open_id = #{openId}  and wx_union_id =#{unionId}
+  </select>
+</mapper>
